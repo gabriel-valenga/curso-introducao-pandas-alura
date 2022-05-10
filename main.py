@@ -59,4 +59,7 @@ find_teste_loc_dataframe = teste_loc_dataframe.loc[['2']]
 find_teste_iloc_dataframe = teste_loc_dataframe.iloc[[1,2]]
 
 apenas_alunos_reprovados = alunos['Aprovado'] == False
-apenas_alunos_reprovados = alunos[apenas_alunos_reprovados]['Nome', 'Sexo', 'Idade']
+apenas_alunos_reprovados = alunos[['Nome', 'Sexo', 'Idade']],[apenas_alunos_reprovados]
+
+tres_alunos_mais_novos = alunos.sort_values(by=['Idade'])
+tres_alunos_mais_novos = tres_alunos_mais_novos.iloc[:3]

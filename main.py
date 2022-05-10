@@ -36,11 +36,11 @@ nomes_dataframe.sort_values(by='X', inplace=True)
 nomes_dataframe.sort_values(by='3', axis=1, inplace=True)
 
 alunos = pandas.DataFrame({'Nome': ['Ary', 'Cátia', 'Denis', 'Beto', 'Bruna', 'Dara', 'Carlos', 'Alice'],
-                            'Sexo': ['M', 'F', 'M', 'M', 'F', 'F', 'M', 'F'],
-                            'Idade': [15, 27, 56, 32, 42, 21, 19, 35],
-                            'Notas': [7.5, 2.5, 5.0, 10, 8.2, 7, 6, 5.6],
-                            'Aprovado': [True, False, False, True, True, True, False, False]},
-                            columns = ['Nome', 'Idade', 'Sexo', 'Notas', 'Aprovado'])
+                           'Sexo': ['M', 'F', 'M', 'M', 'F', 'F', 'M', 'F'],
+                           'Idade': [15, 27, 56, 32, 42, 21, 19, 35],
+                           'Notas': [7.5, 2.5, 5.0, 10, 8.2, 7, 6, 5.6],
+                           'Aprovado': [True, False, False, True, True, True, False, False]},
+                          columns=['Nome', 'Idade', 'Sexo', 'Notas', 'Aprovado'])
 
 selecao_alunos_aprovados = alunos['Aprovado'] == True
 selecao_alunas_aprovadas = (alunos['Aprovado'] == True) & (alunos['Sexo'] == 'F')
@@ -50,3 +50,13 @@ selecao_alunos_dez_a_vinte_ou_maior_40 = ((alunos['Idade'] >= 10)\
 alunos_aprovados = alunos[selecao_alunos_aprovados]
 alunas_aprovadas = alunos[selecao_alunas_aprovadas]
 alunos_dez_a_vinte_ou_maior_quarenta = alunos[selecao_alunos_dez_a_vinte_ou_maior_40]
+
+teste_loc = [['João', 'Maria', 'Ana'], ['Amanda', 'Carol', 'Viviane'], ['Letícia', 'Daniele', 'Carla']]
+
+teste_loc_dataframe = pandas.DataFrame(nomes, list('321'), list('ZYX'))
+
+find_teste_loc_dataframe = teste_loc_dataframe.loc[['2']]
+find_teste_iloc_dataframe = teste_loc_dataframe.iloc[[1,2]]
+
+apenas_alunos_reprovados = alunos['Aprovado'] == False
+apenas_alunos_reprovados = alunos[apenas_alunos_reprovados]['Nome', 'Sexo', 'Idade']

@@ -63,3 +63,31 @@ apenas_alunos_reprovados = alunos[['Nome', 'Sexo', 'Idade']],[apenas_alunos_repr
 
 tres_alunos_mais_novos = alunos.sort_values(by=['Idade'])
 tres_alunos_mais_novos = tres_alunos_mais_novos.iloc[:3]
+
+dados_imoveis_drop_na = dados_imoveis_csv
+dados_imoveis_drop_na.dropna(subset=['Valor'], inplace=True)
+print(dados_imoveis_drop_na)
+
+dados_imoveis_fill_na = dados_imoveis_csv
+dados_imoveis_fill_na.fillna({'Condominio': 0, 'IPTU': '-'}, inplace=True)
+
+dados_imoveis_fill_na_ffill = dados_imoveis_csv
+dados_imoveis_fill_na_ffill.fillna(method='ffill', inplace=True)  # preenche com o valor do elemento anterior de cima pra baixo
+print(dados_imoveis_fill_na)
+
+dados_imoveis_fill_na_bfill = dados_imoveis_csv
+dados_imoveis_fill_na_bfill.fillna(method='bfill', inplace=True)  # preenche com o valor do elemento anterior de baixo pra cima
+
+atletas_melhor_tempo = pandas.DataFrame([['Marcos', 9.62], ['Pedro', None], ['João', 9.69],
+                        ['Beto', 9.72], ['Sandro', None], ['Denis', 9.69],
+                        ['Ary', None], ['Carlos', 9.74]],
+                        columns = ['Corredor', 'Melhor Tempo'])
+
+atletas_melhor_tempo.info
+
+atletas_melhor_tempo.fillna(atletas_melhor_tempo["Melhor Tempo"].mean(), inplace=True)  #mean eh a media de todos os valores
+print(atletas_melhor_tempo)
+
+
+
+

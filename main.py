@@ -1,28 +1,34 @@
 import os.path
 
-import pandas
+import pandas as pd
 
+#IMPORTANDOS DADOS 
 dados_imoveis_csv = pandas.read_csv('./static/aluguel.csv', sep=';')
 dados_imoveis_excel = pandas.read_excel('./static/aluguel.xlsx')
 dados_imoveis_json = pandas.read_json('./static/aluguel.json')
 dados_imoveis_txt = pandas.read_table('./static/aluguel.txt')
 dados_imoveis_html = pandas.read_html('https://www.federalreserve.gov/releases/h3/current/default.htm')
 
+
 dados_imoveis = dados_imoveis_json
-colunas_tipo_dados_imoveis = dados_imoveis.dtypes
-tamanho_dataframe_dados_imoveis = dados_imoveis.shape[0]
+colunas_tipo_dados_imoveis = dados_imoveis.dtypes  # --- RETORNA O TIPO DE VERIÁVEIS DE CADA COLUNA 
+tamanho_dataframe_dados_imoveis = dados_imoveis.shape # --- RETORNA A QUANTIDADE DE LINHAS E COLUNAS DO DATAFRAME
+tamanho_dataframe_dados_imoveis = dados_imoveis.shape[0] # --- RETORNA A QUANTIDADE DE LINHAS DO DATAFRAME
+tamanho_dataframe_dados_imoveis = dados_imoveis.shape[1] # --- RETORNA A QUANTIDADE DE colunas DO DATAFRAME
 
-tipos_de_imovel = dados_imoveis['Tipo']
-tipos_de_imovel.drop_duplicates(inplace=True)  # inplace para executar o metodo direto na variavel, sem ter que criar uma nova para receber a execucao do metodo. exemplo nova_variavel = variavel()
-tamanho_tipos_de_imovel = tipos_de_imovel.shape[0]
-tipos_de_imovel.index = range(tamanho_tipos_de_imovel)  # para corrigir os indices ex: 0,1,2,3...
+tipos_de_imovel = dados_imoveis['Tipo'] # --- COLETA APENAS A COLINA TIPO DO DATAFREME
+tipos_de_imovel.drop_duplicates() # --- REMOVE TODOS OS DADOS DUPLICADOS, DEIXANDO APENAS O PRIMEIRO DADO ENCONTRADO
+tipos_de_imovel.drop_duplicates(inplace=True)  # -- UTILIZAR inplace PARA EXECUTAR O METODO DIRETO NA VARIAVEL, SEMPRECISAR RECECER USADO O SIMBOLO =
+tipos_de_imovel.index = range(tamanho_tipos_de_imovel.shape[0])  # -- CORRIGIR OS INDICES EX: 0,1,2,3..
 
-apenas_apartamentos = dados_imoveis['Tipo'] == 'Apartamento'
+apenas_apartamentos = dados_imoveis['Tipo'] == 'Apartamento' # -- VARIAVEL RECEBE TODOS OS "TIPO" IGUAL A Apartamento.
 apenas_casas = (dados_imoveis['Tipo'] == 'Casa') \
                | (dados_imoveis['Tipo'] == 'Casa de Condomínio') \
-               | (dados_imoveis['Tipo'] == 'Casa de Vila')
-dados_imoveis_apartamentos = dados_imoveis[apenas_apartamentos]
-dados_imoveis_casas = dados_imoveis[apenas_casas]
+               | (dados_imoveis['Tipo'] == 'Casa de Vila') # -- VATIAVEL RECEBE TIPO IGUAL A Casa OU Casa de Condomínio OU Casa de Vila
+
+
+#dados_imoveis_apartamentos = dados_imoveis[apenas_apartamentos]
+#dados_imoveis_casas = dados_imoveis[apenas_casas]
 
 dados_imoveis_filtrar_colunas = dados_imoveis.iloc[[0, 1], [0, 1]]
 
